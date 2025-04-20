@@ -1,8 +1,8 @@
 # 📱 sellEase – Mobile eCommerce & Live Sales for Youth Entrepreneurs
 
-sellEase is a mobile-first eCommerce and live sales platform designed to empower youth entrepreneurs and small business owners in Africa and beyond. With sellEase, users can create mini-shops, showcase products, go live to sell in real-time, and accept orders via chat — all from their phone.
+Welcome to the backend API for SellEase, a mobile-first platform built to empower youth-owned and informal businesses by allowing them to list products, run live video sales, and accept orders directly through mobile phones.
 
-This full-stack project is built using **Flutter (Riverpod)** for the frontend, **Express.js** for the backend, and **MongoDB** as the database.
+This backend is built with Express.js and MongoDB, providing RESTful APIs for product management, user authentication, live sales sessions, order processing, and more.
 
 ---
 
