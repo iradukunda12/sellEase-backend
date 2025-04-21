@@ -4,12 +4,18 @@
   "description": "Welcome to the backend API for SellEase, a mobile-first platform built to empower youth-owned and informal businesses by allowing them to list products, run live video sales, and accept orders directly through mobile phones.",
   "license": "ISC",
   "author": "",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "express-jwt": "^8.5.1",
+    "express-validator": "^7.2.1",
+    "mongoose": "^8.13.2",
+    "nodemon": "^3.1.9"
   }
 }

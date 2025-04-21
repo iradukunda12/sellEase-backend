@@ -1,0 +1,14 @@
+#dependencies
+node_modules
+#build
+dist
+#local env
+.env
+#IDE
+.idea
+.vscode
+#macOS
+.DS_Store
+#Windows
+Thumbs.db
+           
