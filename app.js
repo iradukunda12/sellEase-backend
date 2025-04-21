@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import express, { json } from "express";
 import { connectDB } from "./config/db.js";
-import authRoutes from "./src/routes/auth/userRegister.js";
+import authRoutes from "./src/routes/auth/auth.js";
 
 const app = express();
 const Port = process.env.PORT || 3000;

@@ -28,3 +28,22 @@ export const registerValidation = [
       "password should contain at least one uppercase letter, one lowercase letter, one number and one special character"
     ),
 ];
+export const loginValidation = [
+  body("email")
+    .contains("@")
+    .withMessage("email must contains '@' ")
+    .isEmail()
+    .withMessage("email is not valid"),
+  body("password")
+    .trim()
+    .notEmpty()
+    .withMessage("password is required")
+    .isLength({ min: 8 })
+    .withMessage("password should be between 6 to 8 characters")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+    )
+    .withMessage(
+      "password should contain at least one uppercase letter, one lowercase letter, one number and one special character"
+    ),
+];
