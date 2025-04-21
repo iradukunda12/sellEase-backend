@@ -19,7 +19,7 @@ export const registerValidation = [
     .trim()
     .notEmpty()
     .withMessage("password is required")
-    .isLength({ min: 8, max: 8 })
+    .isLength({ min: 8 })
     .withMessage("password should be between 6 to 8 characters")
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
