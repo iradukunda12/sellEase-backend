@@ -1,5 +1,5 @@
-import User from "../../models/User.js";
-import { generateOTP } from "../../utils/otpGenerator.js";
+import { User } from "./../../models/userRegistration.js";
+import { sendEmail } from "../../utils/sendEmail.js";
 
 export const requestPasswordResetService = async (email) => {
   const user = await User.findOne({ email });
