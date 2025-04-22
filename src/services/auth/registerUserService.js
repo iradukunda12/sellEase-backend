@@ -1,15 +1,13 @@
-import { User } from "./../../models/userRegistration.js";
+import { User } from "../../models/userRegistration.js";
 import bcrypt from "bcryptjs";
 
-export const registerUserService = async (
-  { name, email, phone, password }
-) => {
-    const existingUser = await User.findOne({
-        $or: [{ email }, {phone} ],
+export const registerUserService = async ({ name, email, phone, password }) => {
+  const existingUser = await User.findOne({
+    $or: [{ email }, { phone }],
   });
-    if (existingUser) {
-        throw new Error("User already exists");
-    }
+  if (existingUser) {
+    throw new Error("User already exists");
+  }
 
   const salt = await bcrypt.genSalt(10);
   const hashPassword = await bcrypt.hash(password, salt);

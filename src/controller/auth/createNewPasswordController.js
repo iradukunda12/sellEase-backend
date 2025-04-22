@@ -1,4 +1,4 @@
-import { createNewPasswordService } from "./../../services/authService/createNewPasswordService.js";
+import { createNewPasswordService } from "../../services/auth/createNewPasswordService.js";
 
 export const createNewPasswordController = async (req, res) => {
   try {

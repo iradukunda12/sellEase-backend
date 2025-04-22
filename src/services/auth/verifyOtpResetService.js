@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
-import { User } from "./../../models/userRegistration.js";
+import { User } from "../../models/userRegistration.js";
 
 dotenv.config();
 
@@ -37,11 +37,9 @@ export const verifyOtpResetService = async (token, submittedOtp) => {
 
     return {
       message: "OTP verified successfully",
-        data: {
-            email: user.email,
-            
-            
-      }
+      data: {
+        email: user.email,
+      },
     };
   } catch (error) {
     console.error("Service error details:", error);

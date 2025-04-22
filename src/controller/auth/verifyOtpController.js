@@ -1,4 +1,4 @@
-import { verifyOtpResetService } from "./../../services/authService/verifyOtpResetService.js";
+import { verifyOtpResetService } from "../../services/auth/verifyOtpResetService.js";
 
 export const verifyOtpController = async (req, res) => {
   try {

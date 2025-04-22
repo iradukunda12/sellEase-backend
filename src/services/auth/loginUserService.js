@@ -20,6 +20,7 @@ export const loginUserService = async ({ email, password }) => {
       _id: existingUser._id,
       email: existingUser.email,
       name: existingUser.name,
+      userType: existingUser.userType,
     },
     process.env.JWT_SECRET,
     {
@@ -32,6 +33,7 @@ export const loginUserService = async ({ email, password }) => {
     name: existingUser.name,
     email: existingUser.email,
     phone: existingUser.phone,
+    userType: existingUser.userType,
     token,
   };
 };
