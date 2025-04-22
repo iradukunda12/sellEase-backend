@@ -20,11 +20,9 @@ const userSchema = new mongoose.Schema({
   },
   otpCode: {
     type: String,
-    require: true,
   },
   otpExpireTime: {
     type: Date,
-    default: null,
   },
 });
 
