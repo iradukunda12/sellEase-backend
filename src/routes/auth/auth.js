@@ -6,7 +6,7 @@ import {
 } from "../../validation/authValidator.js";
 import { validateRequest } from "../../middlewares/validationRequest.js";
 import { loginUser } from "../../controller/auth/userLoginController.js";
-import { requestResetController } from "../../controller/auth/resetPasswordController.js";
+import { requestResetController } from "./../../controller/auth/resetPasswordController.js";
 
 const router = express.Router();
 
