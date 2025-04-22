@@ -47,3 +47,19 @@ export const loginValidation = [
       "password should contain at least one uppercase letter, one lowercase letter, one number and one special character"
     ),
 ];
+
+export const createNewPasswordValidation = [
+  body("Password")
+    .trim()
+    .notEmpty()
+    .withMessage("password is required")
+    .isLength({ min: 8 })
+    .withMessage("Password should be minimum 8 characters")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+    )
+    .withMessage(
+      "password should contain at least one uppercase letter, one lowercase letter, one number and one special character"
+    ),
+];
+

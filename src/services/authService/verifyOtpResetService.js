@@ -37,7 +37,11 @@ export const verifyOtpResetService = async (token, submittedOtp) => {
 
     return {
       message: "OTP verified successfully",
-      email: user.email,
+        data: {
+            email: user.email,
+            
+            
+      }
     };
   } catch (error) {
     console.error("Service error details:", error);
