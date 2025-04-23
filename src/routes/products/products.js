@@ -3,8 +3,13 @@ import { createProductController } from "./../../controller/products/createProdu
 import { createProductValidation } from "./../../validation/productValidation.js";
 import { authorizeRoles } from "./../../middlewares/authorixation.js";
 import { authenticateUser } from "./../../middlewares/auth.js";
+import multer from "multer";
+import { uploadProductImageController } from "./../../controller/products/product.js";
 
 const router = express.Router();
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 router.post(
   "/create-product",
@@ -13,5 +18,12 @@ router.post(
   authorizeRoles("seller"),
   createProductController
 );
+router.post(
+  "/:id/upload-image",
+  authenticateUser,
+  upload.single("image"),
+  uploadProductImageController
+);
+
 
 export default router;
