@@ -36,3 +36,19 @@ export const uploadProductImageController = async (req, res) => {
     return res.status(500).json({ message: "Error uploading image", error });
   }
 };
+
+export const getSellerProductsController = async (req, res) => {
+  try {
+    const seller = req.user._id;
+
+    const myProducts = await products.find({ seller: seller });
+
+    res.status(200).json({
+      message: "Products fetched successfully",
+      count: myProducts.length,
+      products: myProducts,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch products", error });
+  }
+};

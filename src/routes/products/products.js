@@ -5,6 +5,7 @@ import { authorizeRoles } from "./../../middlewares/authorixation.js";
 import { authenticateUser } from "./../../middlewares/auth.js";
 import multer from "multer";
 import { uploadProductImageController } from "./../../controller/products/product.js";
+import { getSellerProductsController } from "./../../controller/products/product.js";
 
 const router = express.Router();
 
@@ -24,6 +25,10 @@ router.post(
   upload.single("image"),
   uploadProductImageController
 );
-
+router.get(
+  "/getAllSellerProduct",
+  authenticateUser,
+  getSellerProductsController
+);
 
 export default router;
