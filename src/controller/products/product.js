@@ -24,12 +24,17 @@ export const uploadProductImageController = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    product.imageUrl = result.secure_url;
+
+    product.images.push({
+      url: result.secure_url,
+      public_id: result.public_id,
+    });
+
     await product.save();
 
     return res.status(200).json({
       message: "Image uploaded successfully",
-      imageUrl: product.imageUrl,
+      imageUrl: result.secure_url,
     });
   } catch (error) {
     console.error(error);
