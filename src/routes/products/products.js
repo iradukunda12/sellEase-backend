@@ -8,6 +8,8 @@ import {
   uploadProductImageController,
   getSellerFilteredProducts,
   getSellerProductsController,
+  deleteProductController,
+  updateProductController,
 } from "./../../controller/products/product.js";
 
 const router = express.Router();
@@ -34,5 +36,7 @@ router.get(
   getSellerProductsController
 );
 router.get("/my-products", authenticateUser, getSellerFilteredProducts);
+router.put("/my-products/:id", authenticateUser, updateProductController);
+router.delete("/my-products/:id", authenticateUser, deleteProductController);
 
 export default router;

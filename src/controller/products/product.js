@@ -101,3 +101,62 @@ export const getSellerFilteredProducts = async (req, res) => {
     return res.status(500).json({ message: "Error fetching products", error });
   }
 };
+
+export const updateProductController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const seller = req.user._id;
+
+    const product = await products.findOne({ _id: id, seller: seller });
+    if (!product) {
+      return res
+        .status(404)
+        .json({ message: "Product not found or not authorized" });
+    }
+
+    const allowedUpdates = [
+      "name",
+      "price",
+      "description",
+      "category",
+      "tags",
+      "stock",
+    ];
+    allowedUpdates.forEach((field) => {
+      if (req.body[field] !== undefined) {
+        product[field] = req.body[field];
+      }
+    });
+
+    await product.save();
+
+    return res
+      .status(200)
+      .json({ message: "Product updated successfully", product });
+  } catch (error) {
+    console.error("Update error:", error);
+    return res.status(500).json({ message: "Server error", error });
+  }
+};
+
+export const deleteProductController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const seller = req.user._id;
+
+    const product = await products.findOneAndDelete({
+      _id: id,
+      seller: seller,
+    });
+    if (!product) {
+      return res
+        .status(404)
+        .json({ message: "Product not found or not authorized" });
+    }
+
+    return res.status(200).json({ message: "Product deleted successfully" });
+  } catch (error) {
+    console.error("Delete error:", error);
+    return res.status(500).json({ message: "Server error", error });
+  }
+};
