@@ -24,7 +24,6 @@ export const uploadProductImageController = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-
     product.images.push({
       url: result.secure_url,
       public_id: result.public_id,
@@ -55,5 +54,50 @@ export const getSellerProductsController = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch products", error });
+  }
+};
+
+export const getSellerFilteredProducts = async (req, res) => {
+  try {
+    const seller = req.user._id;
+    const { category, tag, sort, page = 1, limit = 10 } = req.query;
+
+    const filter = { seller };
+
+    if (category) {
+      filter.category = category;
+    }
+
+    if (tag) {
+      filter.tags = tag;
+    }
+
+    let sortOption = { createdAt: -1 };
+    if (sort === "price_asc") {
+      sortOption = { price: 1 };
+    } else if (sort === "price_desc") {
+      sortOption = { price: -1 };
+    }
+
+    const skip = (page - 1) * limit;
+
+    const productsList = await products
+      .find(filter)
+      .sort(sortOption)
+      .skip(skip)
+      .limit(parseInt(limit));
+
+    const totalProducts = await products.countDocuments(filter);
+
+    return res.status(200).json({
+      message: "Seller products fetched successfully",
+      total: totalProducts,
+      page: parseInt(page),
+      limit: parseInt(limit),
+      products: productsList,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Error fetching products", error });
   }
 };

@@ -4,8 +4,11 @@ import { createProductValidation } from "./../../validation/productValidation.js
 import { authorizeRoles } from "./../../middlewares/authorixation.js";
 import { authenticateUser } from "./../../middlewares/auth.js";
 import multer from "multer";
-import { uploadProductImageController } from "./../../controller/products/product.js";
-import { getSellerProductsController } from "./../../controller/products/product.js";
+import {
+  uploadProductImageController,
+  getSellerFilteredProducts,
+  getSellerProductsController,
+} from "./../../controller/products/product.js";
 
 const router = express.Router();
 
@@ -30,5 +33,6 @@ router.get(
   authenticateUser,
   getSellerProductsController
 );
+router.get("/my-products", authenticateUser, getSellerFilteredProducts);
 
 export default router;
