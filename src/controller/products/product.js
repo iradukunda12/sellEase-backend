@@ -195,3 +195,35 @@ export const getSellersWithProducts = async (req, res) => {
   }
 };
 
+
+export const viewAllproductbySpecificSellerController = async (req, res) => {
+  try {
+    const { sellerId } = req.params;
+    const {
+      category,
+      tags,
+      search,
+      sort = "latest",
+      page = 1,
+      limit = 10,
+    } = req.query;
+
+    const filter = { seller: sellerId };
+
+    if (category) filter.category = category;
+    if (tags) filter.tags = { $in: tags.split(",") };
+    if (search) filter.name = { $regex: search, $options: "i" };
+
+    const sortOption = sort === "price" ? { price: 1 } : { createdAt: -1 };
+
+    const productsList = await products
+      .find(filter)
+      .sort(sortOption)
+      .skip((page - 1) * limit)
+      .limit(parseInt(limit));
+
+    res.status(200).json({ products: productsList });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch seller products", error });
+  }
+};

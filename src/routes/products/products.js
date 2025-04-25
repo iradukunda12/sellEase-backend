@@ -11,6 +11,7 @@ import {
   deleteProductController,
   updateProductController,
   getSellersWithProducts,
+  viewAllproductbySpecificSellerController,
 } from "./../../controller/products/product.js";
 
 const router = express.Router();
@@ -40,5 +41,9 @@ router.get("/my-products", authenticateUser, getSellerFilteredProducts);
 router.put("/my-products/:id", authenticateUser, updateProductController);
 router.delete("/my-products/:id", authenticateUser, deleteProductController);
 router.get("/sellers-with-products", getSellersWithProducts);
+router.get(
+  "/seller-products/:sellerId",
+  viewAllproductbySpecificSellerController
+);
 
 export default router;
