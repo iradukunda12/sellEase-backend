@@ -160,3 +160,38 @@ export const deleteProductController = async (req, res) => {
     return res.status(500).json({ message: "Server error", error });
   }
 };
+
+export const getSellersWithProducts = async (req, res) => {
+  try {
+    const sellers = await products.aggregate([
+      {
+        $group: {
+          _id: "$seller",
+          totalProducts: { $sum: 1 },
+        },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "_id",
+          foreignField: "_id",
+          as: "sellerInfo",
+        },
+      },
+      { $unwind: "$sellerInfo" },
+      {
+        $project: {
+          sellerId: "$_id",
+          name: "$sellerInfo.name",
+          shopname: "$sellerInfo.shopname", 
+          totalProducts: 1,
+        },
+      },
+    ]);
+
+    res.status(200).json({ sellers });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to get sellers", error });
+  }
+};
+

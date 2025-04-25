@@ -10,6 +10,7 @@ import {
   getSellerProductsController,
   deleteProductController,
   updateProductController,
+  getSellersWithProducts,
 } from "./../../controller/products/product.js";
 
 const router = express.Router();
@@ -38,5 +39,6 @@ router.get(
 router.get("/my-products", authenticateUser, getSellerFilteredProducts);
 router.put("/my-products/:id", authenticateUser, updateProductController);
 router.delete("/my-products/:id", authenticateUser, deleteProductController);
+router.get("/sellers-with-products", getSellersWithProducts);
 
 export default router;
